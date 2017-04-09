@@ -141,6 +141,8 @@ The compiler excels at providing easy-to-read and helpful error messages for typ
 
 ### Should I learn or use it?
 
+Yes! We'll talk more about adding Elm to an existing application and about using JavaScript alongside Elm at the end. Even if work constraints and considerations prevent you from using Elm at this time, there are still advantages to learning Elm. Writing Elm encourages writing safe code in any language, and illustrates the benefits of limiting side effects and having simple, unidirectional data flow.
+
 ## Getting Started
 ## Just Enough Syntax
 ## Joyful Tools
