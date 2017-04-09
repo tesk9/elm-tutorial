@@ -37,7 +37,59 @@ function incrementCounter (counter) {
 }
 ```
 
-If we call this function without an argument, we get back `NaN`--aka code for future sorrow.
+If we call this function without an argument (or with a string or object), we get back `NaN`--aka code for future sorrow. Plus, for some arrays (`[]`, `["100"]`), we actually do get back a number.
+
+Let's write a type-signature the Elm way:
+
+```
+incrementCounter : number -> number
+```
+```
+function incrementCounter (counter) {
+    if (typeof counter === 'number') {
+        return ++counter
+    } else {
+        throw "type error: called incrementCounter with non-number argument."
+    }
+}
+```
+
+Okay! So in JS, to make sure incrementCounter is called just with numbers, we make our callee handle an exception.
+
+But wait--our function is named `incrementCounter`. The "counter" part of that implies that we're talking about integers, not floats. Right now, that's not encapsulated by our Elm type signature or by our JS code.
+
+Let's finish writing out the Elm code first:
+
+
+```
+incrementCounter : Int -> Int
+incrementCounter counter =
+    counter + 1
+```
+
+Note that now we can only call `incrementCounter` with an integer argument, and that it will always hand back an integer too.
+
+
+In JS:
+
+```
+// Polyfill for IE and Opera Mobile from [MDN Number.isInteger entry](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/isInteger)
+Number.isInteger = Number.isInteger || function(value) {
+  return typeof value === 'number' &&
+    isFinite(value) &&
+    Math.floor(value) === value;
+};
+
+function incrementCounter (counter) {
+    if (Number.isInteger(counter)) {
+        return ++counter
+    } else {
+        throw "type error: called incrementCounter with non-integer argument."
+    }
+}
+```
+
+Note that we still may have some trouble! `1.0000000` is considered an integer, which is probably fine but maybe won't be fine.
 
 
 #### The Compiler
