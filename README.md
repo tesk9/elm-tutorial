@@ -94,6 +94,50 @@ Note that we still may have some trouble! `1.0000000` is considered an integer, 
 
 #### The Compiler
 
+Type safety works through the compiler. The compiler checks that the types of various values and functions line up, so that there aren't surprises when code is live. The Elm Compiler in particular is known for helpful error messages. Let's revisit the counter example.
+
+If I try to increment `1.000000`, I'll get an error message like this, plus details about line number:
+
+```
+The argument to function incrementCounter is causing a mismatch.
+Function incrementCounter is expecting the argument to be:
+
+Int
+
+But it is:
+
+Float
+
+Hint: Elm does not automatically convert between Ints and Floats. Use toFloat
+and round to do specific conversions.
+```
+
+Oops, `1.000000` isn't an Int, but we can make it one by rounding!
+
+```
+ourFloat : Float
+ourFloat =
+    1.000000
+
+
+counter : Int
+counter =
+    round ourFloat
+
+incrementedCounter : Int
+incrementedCounter =
+    incrementCounter counter
+```
+
+Or, more succinctly:
+
+```
+incrementedCounter : Int
+incrementedCounter =
+    incrementCounter (round 1.000000)
+```
+
+The compiler excels at providing easy-to-read and helpful error messages for type mismatches. It has a harder time with syntactic errors, so we'll spend some time making sure we've all got basic syntax down. Please also don't hesitate to ask questions about surprising or confusing compiler messages.
 
 ### Should I learn or use it?
 
