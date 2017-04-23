@@ -371,7 +371,25 @@ don't show the decrement button if there aren't any chickens).
 
 ### Installation
 
-###
+Let's get this killer application up and running locally!
+
+Run `elm` on the command line. If the output includes "Elm Platform 0.18.0 - a way to run all Elm tools" then you're good to go!
+
+Otherwise, follow the [instructions for your operating system](https://guide.elm-lang.org/install.html) or run `npm install elm`.
+
+Speaker notes:
+- Check to be sure everyone is ready to proceed.
+
+Let's get a project set up.
+
+```
+> mkdir prairie-chicken-counter
+> cd priarie-chicken-counter
+> touch Main.elm
+> elm-reactor
+```
+
+Now let's plop our bird-watching code in that Main file and refresh our browser. Tada!
 
 ## Just Enough Syntax
 ## Joyful Tools
