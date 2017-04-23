@@ -392,6 +392,33 @@ Let's get a project set up.
 Now let's plop our bird-watching code in that Main file and refresh our browser. Tada!
 
 ## Just Enough Syntax
+
+At this point, we've seen some code and we've written some code. We're going to briefly go
+some syntax in the interest of getting confident and having a handy-dandy reference.
+
+### Strings
+
+Strings are denoted with double-quotation-marks, never single-quotation marks.
+
+Strings are concatenated with the `(++)` operator, which can be used as an infix operator,
+as we've already seen, or as a prefix operator.
+
+```
+exclaim : String -> String
+exclaim comment =
+    comment ++ "!"
+
+noSeriouslyExclaimTho : String -> String
+noSeriouslyExclaimTho comment =
+    (++) comment "!!!!"
+```
+
+More complex operations with Strings can be explored in the [String documentation](http://package.elm-lang.org/packages/elm-lang/core/5.1.1/String).
+
+### Functions
+
+
+
 ## Joyful Tools
 ## Finding and Using Packages
 ## Writing and Publishing a Package
