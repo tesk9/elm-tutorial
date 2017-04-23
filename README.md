@@ -144,6 +144,216 @@ The compiler excels at providing easy-to-read and helpful error messages for typ
 Yes! We'll talk more about adding Elm to an existing application and about using JavaScript alongside Elm at the end. Even if work constraints and considerations prevent you from using Elm at this time, there are still advantages to learning Elm. Writing Elm encourages writing safe code in any language, and illustrates the benefits of limiting side effects and having simple, unidirectional data flow.
 
 ## Getting Started
+
+Please follow along and type things!
+
+### [Ellie](https://ellie-app.com/new) ELm LIve Editor
+
+#### Hello, World
+
+Let's start with the imports. We're importing an Html library and exposing `Html` and `text`. `Html` signifies a type and `text` is a function that takes a string and returns an html text node.
+
+Change the import to be `(..)` and we'll be importing everything from `Html`.
+
+`main` is special, and you'll see a `main` in every Elm app. For now, just notice that it's producing `Html`.
+
+- Hit Compile, "Hello, World!"
+
+Yay app is done!
+
+#### Bird Counter
+
+Not really. We're going to make a mini bird-counting application. Specifically, we'll be counting the mighty lesser prairie chicken.
+
+Let's build out a view first.
+
+Apart from `text`, most functions in the `Html` library take a list of attributes as their first argument and a list of children as their second.
+
+
+```
+main : Html msg
+main =
+    view
+
+
+view : Html msg
+view =
+    div []
+        [ h1 [] [ text "Prairie Chicken, Lesser" ]
+        , h2 [] [ text "An Accounting of Hens" ]
+        , div []
+            [ text "We have seen: "
+            , text "0 chickens."
+            ]
+        ]
+```
+
+Okay, so how do we avoid hardcoding the number of chickens we've seen? `view` is a function, and right now it doesn't take any arguments. Let's have it take the number of chickens we've seen:
+
+
+```
+main : Html msg
+main =
+    view lesserPrairieChickenCount
+
+lesserPrairieChickenCount : Int
+lesserPrairieChickenCount =
+    0
+
+view : Int -> Html msg
+view count =
+    div []
+        [ h1 [] [ text "Prairie Chicken, Lesser" ]
+        , h2 [] [ text "An Accounting of Hens" ]
+        , div []
+            [ text "We have seen: "
+            , text (toString count ++ " chickens.")
+            ]
+        ]
+
+```
+
+Note that we need to use `toString` in order to go from our integer value to a string value.
+
+Let's add a button that we'll click whenever we see a lesser prairie chicken.
+
+```
+main : Html msg
+main =
+    view lesserPrairieChickenCount
+
+lesserPrairieChickenCount : Int
+lesserPrairieChickenCount =
+    0
+
+view : Int -> Html msg
+view count =
+    div []
+        [ h1 [] [ text "Prairie Chicken, Lesser" ]
+        , h2 [] [ text "An Accounting of Hens" ]
+        , div []
+            [ text "We have seen: "
+            , text (toString count ++ " chickens.")
+            ]
+        , viewCountButton
+        ]
+
+
+viewCountButton : Html msg
+viewCountButton =
+    button [] [ text "I see a new lesser prairie chicken!!!" ]
+```
+
+Okay, so we've got a button that doesn't do anything and a count that never changes. How do we wire it all up?
+
+----TODO: add a graph of some kind here----
+
+This is our first taste of the Elm Architecture.
+
+
+```
+main : Program Never Int msg
+main =
+    beginnerProgram
+        { model = 0
+        , update = -- do something???
+        , view = view
+        }
+
+view : Int -> Html msg
+view count =
+    div []
+        [ h1 [] [ text "Prairie Chicken, Lesser" ]
+        , h2 [] [ text "An Accounting of Hens" ]
+        , div []
+            [ text "We have seen: "
+            , text (toString count ++ " chickens.")
+            ]
+        , viewCountButton
+        ]
+
+
+viewCountButton : Html msg
+viewCountButton =
+    button [] [ text "I see a new lesser prairie chicken!!!" ]
+```
+
+Let's use our `incrementCounter` function again. We're going to assume that all the prairie chickens we see stay alive so we don't need to add a decrement function yet.
+
+```
+main : Program Never Int Msg
+main =
+    beginnerProgram
+        { model = 0
+        , update = update
+        , view = view
+        }
+
+type Msg = Increment
+
+update : Msg -> Int -> Int
+update msg model =
+    case msg of
+        Increment ->
+            incrementCounter model
+
+
+incrementCounter : Int -> Int
+incrementCounter counter =
+    counter + 1
+
+
+view : Int -> Html msg
+view count =
+    div []
+        [ h1 [] [ text "Prairie Chicken, Lesser" ]
+        , h2 [] [ text "An Accounting of Hens" ]
+        , div []
+            [ text "We have seen: "
+            , text (toString count ++ " chickens.")
+            ]
+        , viewCountButton
+        ]
+
+
+viewCountButton : Html msg
+viewCountButton =
+    button [] [ text "I see a new lesser prairie chicken!!!" ]
+```
+
+Now there's a lot of new stuff in this step! For one, now we've got this `Msg` thing.
+This is a Union Type--it's a way of defining an enumerable list of allowed values
+that we'll consider to be of the type `Msg`. For now, note that now we have a
+discrete list of allowed actions in our application--within our app, we can
+Increment and that's it.
+
+
+Finally, let's add an onClick handler to finish wiring everything up.
+
+
+```
+import Html.Events exposing (onClick)
+
+...
+
+viewCountButton : Html Msg
+viewCountButton =
+    button [ onClick Increment ] [ text "I see a new lesser prairie chicken!!!" ]
+```
+
+
+Versions:
+- [Without notes](https://ellie-app.com/Z79YDXgtMSa1/0)
+- [With notes](https://ellie-app.com/Z79YDXgtMSa1/1)
+
+EXERCISE: Add decrement functionality. (Sad lesser prairie chicken!)
+[SOLUTION](https://ellie-app.com/Z79YDXgtMSa1/2)
+
+
+### Installation
+
+###
+
 ## Just Enough Syntax
 ## Joyful Tools
 ## Finding and Using Packages
