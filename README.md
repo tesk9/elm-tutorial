@@ -349,6 +349,25 @@ Versions:
 EXERCISE: Add decrement functionality. (Sad lesser prairie chicken!)
 [SOLUTION](https://ellie-app.com/Z79YDXgtMSa1/2)
 
+Speaker notes:
+- walk through solution
+- take questions
+
+Hmm, seems like we've got a grammar mistake. "There are: 1 chickens" doesn't sound great!
+Heads up--any if branch MUST have an else branch.
+
+```
+formatChickenCount count =
+    if count == 1 then
+        "1 chicken."
+    else
+        toString count ++ " chickens."
+```
+
+EXERCISE : Add this logic to the app!
+EXERCISE: Prevent users from decrementing more chickens that is possible (
+don't show the decrement button if there aren't any chickens).
+[SOLUTION](https://ellie-app.com/Z79YDXgtMSa1/3)
 
 ### Installation
 
