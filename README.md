@@ -415,9 +415,98 @@ noSeriouslyExclaimTho comment =
 
 More complex operations with Strings can be explored in the [String documentation](http://package.elm-lang.org/packages/elm-lang/core/5.1.1/String).
 
+### Numbers
+
+```
+float : Float
+float =
+    99.99
+
+
+integer : Int
+integer =
+    round float
+
+```
+
+### Lists
+
+```
+anEmptyList : List a
+anEmptyList =
+    []
+
+
+aListOfStrings : List String
+aListOfStrings =
+    List (List.intersperse " " [ "Just", "some", "strings!" ])
+
+
+hasMyName : List String -> Bool
+hasMyName nameList =
+    List.member "Tessa" nameList
+```
+
 ### Functions
 
+We've already seen a bunch of functions!
 
+```
+iAmAFunction : String -> String
+iAmAFunction argument =
+    "This is the body of the function, and we can add the argument: " ++ argument
+
+
+iAmAFunctionWithLocalScope : Int -> Int
+iAmAFunctionWithLocalScope argument =
+    let
+        iAmALocalVariable : Int
+        iAmALocalVariable =
+            7
+
+        localFunction localArgument =
+            9 + localArgument
+    in
+        argument + localFunction 10
+
+
+exclaimList : List String -> List String
+exclaimList =
+    -- Notice  that we haven't explicitly named the argument to this function
+    List.map (\item -> item ++ "!!!")
+```
+
+### Some Special Operators
+
+`(|>)`, `(<|)`, -- pipe operators!
+
+These operators pass the result of whatever operation happened previously to the arrow side:
+
+```
+helloWithPipeOperator : String
+helloWithPipeOperator =
+    "!!!" |> (++) "Hello" -- this will result as "Hello!!!"
+
+
+helloWithParens : String
+helloWithParens =
+    ((++) "Hello") "!!!" -- this will result as "Hello!!!"
+```
+
+`(>>)`, `(<<)` -- compose functions!
+
+```
+{-| mathItUp [ 0, 1, 2  ] == [ 0, 2, 5 ]
+-}
+mathItUp : List Int -> List Int
+mathItUp =
+    List.map ((*) 2 >> (+) 1)
+
+
+mathItUpWithoutFunctionComposition : List Int -> List Int
+mathItUpWithoutFunctionComposition =
+    List.map (\value -> val * 2 + 1)
+```
 
 ## Joyful Tools
 ## Finding and Using Packages
