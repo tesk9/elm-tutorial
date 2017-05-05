@@ -188,6 +188,8 @@ view =
         ]
 ```
 
+SAVED: https://ellie-app.com/34843V99TMTa1/0
+
 Okay, so how do we avoid hardcoding the number of chickens we've seen? `view` is a function, and right now it doesn't take any arguments. Let's have it take the number of chickens we've seen:
 
 
@@ -212,6 +214,8 @@ view count =
         ]
 
 ```
+
+SAVED: https://ellie-app.com/34843V99TMTa1/1
 
 Note that we need to use `toString` in order to go from our integer value to a string value.
 
@@ -383,9 +387,9 @@ Speaker notes:
 Let's get a project set up.
 
 ```
-> mkdir prairie-chicken-counter
-> cd priarie-chicken-counter
-> touch Main.elm
+$ mkdir prairie-chicken-counter
+$ cd priarie-chicken-counter
+$ touch Main.elm
 > elm-reactor
 ```
 
@@ -509,6 +513,9 @@ mathItUpWithoutFunctionComposition =
 ```
 
 ## Joyful Tools
+
+See tooling.md
+
 ## Finding and Using Packages
 ## Writing and Publishing a Package
 ## Showing off Work
